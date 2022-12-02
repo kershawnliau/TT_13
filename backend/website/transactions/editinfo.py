@@ -1,7 +1,6 @@
 from flask import Blueprint, request
 from flask import jsonify
 from website import mysql
-import json
 
 editinfo = Blueprint('editinfo', __name__)
 
@@ -12,8 +11,6 @@ def edit():
     cursor.execute("select * from user")
     row_headers=[x[0] for x in cursor.description] #this will extract row headers
     results = cursor.fetchall()
-    print(results)
-    print("...")
     jsondata=[]
     results = list(results)
     for result in results:
