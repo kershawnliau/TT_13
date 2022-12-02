@@ -9,7 +9,7 @@ def create_app():
     app = Flask(__name__)
 
     app.config['MYSQL_DATABASE_USER']       = 'root'
-    app.config['MYSQL_DATABASE_PASSWORD']   = 'root'
+    app.config['MYSQL_DATABASE_PASSWORD']   = ''
     app.config['MYSQL_DATABASE_DB']         = 'bank'
     app.config['MYSQL_DATABASE_HOST']       = 'localhost'
     mysql.init_app(app)

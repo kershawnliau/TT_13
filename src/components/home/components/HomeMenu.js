@@ -1,4 +1,4 @@
-import * as React from 'react'
+import { useState, useContext, Fragment } from 'react'
 import Box from '@mui/material/Box'
 import Menu from '@mui/material/Menu'
 import MenuItem from '@mui/material/MenuItem'
@@ -11,10 +11,12 @@ import Logout from '@mui/icons-material/Logout'
 import CustomAvatar from './Avatar'
 import logo from '../../../assets/dbs-logo.png'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../../context/AuthContext'
 
 export default function HomeMenu() {
-	const [anchorEl, setAnchorEl] = React.useState(null)
+	const [anchorEl, setAnchorEl] = useState(null)
 	const open = Boolean(anchorEl)
+	const { logout } = useContext(AuthContext)
 
 	const handleClick = (event) => {
 		setAnchorEl(event.currentTarget)
@@ -24,16 +26,12 @@ export default function HomeMenu() {
 		setAnchorEl(null)
 	}
 
-	const logout = () => {
-		alert('logged out')
-	}
-
 	const navigateProfile = () => {
 		alert('nav to profile logic')
 	}
 
 	return (
-		<React.Fragment>
+		<Fragment>
 			<Box
 				sx={{
 					display: 'flex',
@@ -105,6 +103,6 @@ export default function HomeMenu() {
 					<Button onClick={logout}>Logout</Button>
 				</MenuItem>
 			</Menu>
-		</React.Fragment>
+		</Fragment>
 	)
 }
