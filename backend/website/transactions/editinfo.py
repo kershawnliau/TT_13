@@ -2,8 +2,10 @@ from flask import Blueprint, request
 from flask import Response
 from flask import jsonify
 from website import mysql
+from flask_cors import CORS, cross_origin
 
 editinfo = Blueprint('editinfo', __name__)
+cors = CORS(editinfo)
 
 @editinfo.route('/allusers', methods=["GET"])
 def edit():
@@ -44,8 +46,10 @@ def getuserinfo(userid):
 
 @editinfo.route('/<userid>', methods=["POST"])
 def updateuserinfo(userid):
-    email   = request.args.get("email")
-    address = request.args.get("address")
+    email   = request.get_json()["email"]
+    address = request.get_json()["address"]
+    print("email: " + str(email))
+    print("address: " + str(address))
     
     conn    = mysql.connect()
     cursor  = conn.cursor()
