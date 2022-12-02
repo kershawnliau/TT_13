@@ -9,12 +9,8 @@ import Transaction from './components/home/Transaction/Transaction'
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(true)
-<<<<<<< HEAD
-	const [userId, setUserId] = useState(1)
-=======
 	const [userId, setUserId] = useState(null)
 	const [route, setRoute] = useState(null)
->>>>>>> frontend
 	const login = (userId) => {
 		setIsLoggedIn(true)
 		setUserId(userId)

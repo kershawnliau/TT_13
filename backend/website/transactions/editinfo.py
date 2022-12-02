@@ -2,18 +2,8 @@ from flask import Blueprint, request
 from flask import Response
 from flask import jsonify
 from website import mysql
-<<<<<<< HEAD
-=======
-import json
->>>>>>> frontend
-from flask_cors import CORS, cross_origin
 
 editinfo = Blueprint('editinfo', __name__)
-cors = CORS(editinfo)
-<<<<<<< HEAD
-=======
-
->>>>>>> frontend
 
 @editinfo.route('/allusers', methods=["GET"])
 def edit():

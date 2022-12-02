@@ -1,16 +1,8 @@
-<<<<<<< HEAD
-import React, { useContext, useEffect } from "react";
-import { Stack, TextField, Button } from "@mui/material";
-import { Link } from "react-router-dom";
-import { AuthContext } from "../../context/AuthContext";
-import axios from "axios";
-=======
 import React, { useContext, useEffect } from 'react'
 import { Stack, TextField, Button } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { AuthContext } from '../../context/AuthContext'
 import axios from 'axios'
->>>>>>> frontend
 
 const ProfilePage = () => {
 	const { isLoggedIn, userId, login, logout } = useContext(AuthContext)
@@ -20,16 +12,6 @@ const ProfilePage = () => {
 
 	const [fetch, setFetch] = React.useState(false)
 
-<<<<<<< HEAD
-  async function getUserData() {
-		axios
-			.get(`http://localhost:5000/${userId}`)
-			.then((res) => {
-				let data = res.data;
-        console.log(data[0])
-				setEmail(data[0]["Email"])
-				setAddress(data[0]["Address"]);
-=======
 	async function getUserData() {
 		axios
 			.get(`http://localhost:5000/${userId}`)
@@ -38,7 +20,6 @@ const ProfilePage = () => {
 				console.log(data[0])
 				setEmail(data[0]['Email'])
 				setAddress(data[0]['Address'])
->>>>>>> frontend
 				// setUsername(response.username)
 				// setTotalBalance(getTotalBalance(response))
 			})
@@ -47,13 +28,6 @@ const ProfilePage = () => {
 				alert('unable to retrieve user data')
 			})
 	}
-<<<<<<< HEAD
-
-  useEffect( () => {
-    getUserData()
-  }, [fetch]);
-=======
->>>>>>> frontend
 
 	useEffect(() => {
 		getUserData()
@@ -69,37 +43,12 @@ const ProfilePage = () => {
 	const [editEmail, isEditEmail] = React.useState(false)
 	const [editAddress, isEditAddress] = React.useState(false)
 
-<<<<<<< HEAD
-  const postData = async () => {
-    axios({
-      method: 'post',
-      url: `http://localhost:5000/${userId}`,
-      data: {
-        email: email,
-        address: address
-      }
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.error(err)
-      alert('unable to retrieve user data')
-    })
-  }
-
-  const submitChange = async (event) => {
-    event.preventDefault();
-    postData()
-    setFetch((prevState) => !prevState);
-    alert("submit done");
-  };
-=======
 	const toggleEditEmail = () => {
 		isEditEmail(true)
 	}
 	const toggleEditAddress = () => {
 		isEditAddress(true)
 	}
->>>>>>> frontend
 
 	const postData = async () => {
 		axios({
