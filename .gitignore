@@ -26,4 +26,4 @@ yarn-error.log*
 tt_13-venv
 
 #ignore all .pyc files generated in runtime
-/backend/website/_pycache_*.pyc
+/backend/website/**/*.pyc
