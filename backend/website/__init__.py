@@ -15,13 +15,15 @@ def create_app():
     mysql.init_app(app)
 
 
-    from .auth                   import auth
+    from .auth import auth
+    from .dashboard import dashboard
     from .transactions.editinfo  import editinfo
     from .createTransaction import transactions
 
     
     app.register_blueprint(auth     , url_prefix='/')
     app.register_blueprint(editinfo , url_prefix='/')
+    app.register_blueprint(dashboard , url_prefix='/')
     app.register_blueprint(transactions, url_prefix="/")
     
     return app
