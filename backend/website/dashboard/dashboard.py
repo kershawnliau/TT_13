@@ -1,7 +1,12 @@
 from flask import Blueprint, request, jsonify, Response
 from website import mysql
+from flask_cors import CORS, cross_origin
+
 
 dashboard = Blueprint('dashboard', __name__)
+
+cors = CORS(dashboard)
+
 
 @dashboard.route('/dashboard/<id>', methods=["GET"])
 def get_user_bank_details(id):
@@ -28,3 +33,39 @@ def get_user_bank_details(id):
         li.append(scheduled_txns)
         jsondata.append(dict(zip(row_headers, li)))
     return jsonify(jsondata)
+
+@dashboard.route('/getbankaccount', methods=["GET", "POST"])
+def getbankaccount():
+    print("getbankaccount")
+    userid = request.get_json()["userid"]
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM bankaccount where UserID = %s", (userid) )
+    print("userid",userid)
+    results = cursor.fetchall() 
+    results = list(results)
+    print(results)
+    fields_list = cursor.description
+
+    column_list = []
+    for i in fields_list:
+        column_list.append(i[0])
+
+    jsonData_list = []
+    for row in results:
+        print(type(row))
+        data_dict = {}
+        for i in range(len(column_list)):
+            print(type(column_list[i]))
+            #convert to float if decimal
+            if isinstance(row[i], decimal.Decimal):
+                data_dict[column_list[i]] = float(row[i])
+            else:
+                data_dict[column_list[i]] = row[i]
+
+        jsonData_list.append(data_dict)
+    print("print final json data",jsonData_list)
+
+    return jsonify(jsonData_list)
+
+

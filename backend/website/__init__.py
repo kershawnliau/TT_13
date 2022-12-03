@@ -17,16 +17,15 @@ def create_app():
 
     from .auth import auth
     from.dashboard.dashboard import dashboard
-    app.register_blueprint(auth, url_prefix='/')
     app.register_blueprint(dashboard, url_prefix='/')
-    from .dashboard import dashboard
+    from .dashboard2 import dashboard
     from .transactions.editinfo  import editinfo
     from .createTransaction import transactions
 
     
     app.register_blueprint(auth     , url_prefix='/')
     app.register_blueprint(editinfo , url_prefix='/')
-    app.register_blueprint(dashboard , url_prefix='/')
+    #app.register_blueprint(dashboard2 , url_prefix='/')
     app.register_blueprint(transactions, url_prefix="/")
     
     return app

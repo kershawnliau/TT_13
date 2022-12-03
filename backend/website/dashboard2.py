@@ -81,6 +81,6 @@ def getbankaccount():
         jsonData_list.append(data_dict)
     print("print final json data",jsonData_list)
 
-    return jsonify({"data": str(jsonData_list), "code":200})
+    return jsonify(jsonData_list)
 
 

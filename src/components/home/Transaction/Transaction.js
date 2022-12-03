@@ -12,15 +12,15 @@ import {
   TableRow
 } from "@mui/material";
 import React, { useState } from "react";
-import transactions from "../../../ScheduledTransaction.json";
-import accounts from "../../../BankAccount.json";
+// import transactions from "../../../ScheduledTransaction.json";
+// import accounts from "../../../BankAccount.json";
 
-function Transaction() {
+function Transaction({accounts}) {
   const [selectedTransactions, setSelectedTransactions] = useState([]);
   function currencyFormat(num) {
-    return "$" + num.toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+    return "$" + Number(num).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
   }
-
+  
   function checkTransactions(selectedTxn) {
     const exists = selectedTransactions.find(
       (transaction) => transaction.TransactionID === selectedTxn.TransactionID
@@ -39,11 +39,12 @@ function Transaction() {
     console.log(selectedTransactions);
   };
 
-  const handleAdd = () => {};
+  const handleAdd = () => {
+  };
 
   return (
     <div>
-      {accounts.map((account, index) => {
+      {accounts !== null && accounts.map((account, index) => {
         return (
           <Accordion key={index}>
             <AccordionSummary>
@@ -75,7 +76,7 @@ function Transaction() {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {transactions.map((transaction, index) => {
+                  {account.scheduledTxn.map((transaction, index) => {
                     return (
                       <TableRow key={index}>
                         <TableCell>

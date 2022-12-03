@@ -8,8 +8,8 @@ import { AuthContext } from './context/AuthContext'
 import Transaction from './components/home/Transaction/Transaction'
 
 function App() {
-	const [isLoggedIn, setIsLoggedIn] = useState(false)
-	const [userId, setUserId] = useState(null)
+	const [isLoggedIn, setIsLoggedIn] = useState(true)
+	const [userId, setUserId] = useState("4")
 	const login = (userId) => {
 		setIsLoggedIn(true)
 		setUserId(userId)
@@ -28,7 +28,8 @@ function App() {
 				<Route path="/transactions" element={<Transaction />} exact />
 			</Routes>
 		)
-	} else {
+	} 
+	else {
 		route = (
 			<Routes>
 				<Route path="/" element={<Login />} exact />
