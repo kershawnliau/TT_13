@@ -44,4 +44,31 @@ def getuser():
     return jsonify({"data": json_str, "code":200})
 
 
+@dashboard.route('/getbankaccount', methods=["GET", "POST"])
+def getbankaccount():
+    print("getbankaccount")
+    userid = request.get_json()["userid"]
+    conn = mysql.connect()
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM bankaccount where UserID = %s", (userid))
+    print("userid",userid)
+    results = cursor.fetchall() 
+    results = list(results)
+    print(results)
+    fields_list = cursor.description
+
+    column_list = []
+    for i in fields_list:
+        column_list.append(i[0])
+
+    jsonData_list = []
+    for row in results:
+        data_dict = {}
+        for i in range(len(column_list)):
+            data_dict[column_list[i]] = row[i]
+        jsonData_list.append(data_dict)
+    print("print final json data",jsonData_list)
+
+    return jsonify({"data": str(jsonData_list), "code":200})
+
 

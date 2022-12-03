@@ -1,0 +1,7 @@
+###
+POST http://localhost:5000/getbankaccount
+Content-Type: application/json
+
+{
+    "userid" : "1"
+}
