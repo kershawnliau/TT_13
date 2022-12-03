@@ -11,11 +11,25 @@ const ProfilePage = () => {
 
   const [fetch, setFetch] = React.useState(false);
 
-  useEffect(async () => {
-    const res = await fetch(`http://localhost:5000/${userId}`);
-    const data = await res.json();
-    setEmail(data.email);
-    setAddress(data.address);
+  async function getUserData() {
+    axios
+      .get(`http://localhost:5000/${userId}`)
+      .then((res) => {
+        let data = res.data;
+        console.log(data[0]);
+        setEmail(data[0]["Email"]);
+        setAddress(data[0]["Address"]);
+        // setUsername(response.username)
+        // setTotalBalance(getTotalBalance(response))
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("unable to retrieve user data");
+      });
+  }
+
+  useEffect(() => {
+    getUserData();
   }, [fetch]);
 
   const handleEmailChange = (event) => {
@@ -35,18 +49,29 @@ const ProfilePage = () => {
     isEditAddress(true);
   };
 
-  const submitChange = async (event) => {
-    event.preventDefault();
-    const res = await fetch(`http://localhost:5000/${userId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
+  const postData = async () => {
+    axios({
+      method: "post",
+      url: `http://localhost:5000/${userId}`,
+      data: {
         email: email,
         address: address,
-      }),
-    });
+      },
+    })
+      .then((res) => {
+        console.log(res);
+        isEditAddress(false);
+        isEditEmail(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        alert("unable to post user data");
+      });
+  };
+
+  const submitChange = async (event) => {
+    event.preventDefault();
+    postData();
     setFetch((prevState) => !prevState);
     alert("submit done");
   };
