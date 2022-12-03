@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Stack, TextField, Button } from "@mui/material";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
@@ -8,6 +8,15 @@ const ProfilePage = () => {
 
   const [email, setEmail] = React.useState("");
   const [address, setAddress] = React.useState("");
+
+  const [fetch, setFetch] = React.useState(false);
+
+  useEffect(async () => {
+    const res = await fetch(`http://localhost:5000/${userId}`);
+    const data = await res.json();
+    setEmail(data.email);
+    setAddress(data.address);
+  }, [fetch]);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -38,6 +47,8 @@ const ProfilePage = () => {
         address: address,
       }),
     });
+    setFetch((prevState) => !prevState);
+    alert("submit done");
   };
 
   return (
