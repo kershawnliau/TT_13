@@ -21,7 +21,7 @@ def login():
 def getuser():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT UserID, Username, Firstname, Lastname, Email, Address FROM User")
+    cursor.execute("SELECT * FROM User")
     results = cursor.fetchall() 
 
     fields_list = cursor.description   # sql key name
@@ -34,15 +34,16 @@ def getuser():
     for row in results:
         data_dict = {}
         for i in range(len(column_list)):
-            data_dict[column_list[i]] = row[i]
+            print(type(column_list[i]))
+            #convert to string if bits
+            print("row",row[i])
+            if isinstance(row[i], bytes):
+                data_dict[column_list[i]] = (row[i]).decode('utf-8')
+            else:
+                data_dict[column_list[i]] = row[i]
         jsonData_list.append(data_dict)
-    print("print final json data",jsonData_list)
-
-    json_str = json.dumps(jsonData_list, cls=BytesEncoder)
-    print(type(json_str))
-    results = json_str.replace("\\","")
     print(results)
-    return jsonify({"data": json_str, "code":200})
+    return jsonify({"data": jsonData_list, "code":200})
 
 
 @dashboard.route('/getbankaccount', methods=["GET", "POST"])

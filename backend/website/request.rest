@@ -5,3 +5,6 @@ Content-Type: application/json
 {
     "userid" : "1"
 }
+
+###
+GET http://localhost:5000/getusers
