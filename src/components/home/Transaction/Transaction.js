@@ -9,9 +9,9 @@ import {
   TableBody,
   TableCell,
   TableHead,
-  TableRow,
+  TableRow
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import transactions from "../../../ScheduledTransaction.json";
 import accounts from "../../../BankAccount.json";
 
@@ -22,22 +22,24 @@ function Transaction() {
   }
 
   function checkTransactions(selectedTxn) {
-    // console.log(selectedTransactions)
-    const exists = selectedTransactions.find(transaction => transaction.id === selectedTxn.id);
-    console.log(exists);
-    if (exists === undefined) {
-        console.log(selectedTransactions)
-        setSelectedTransactions(selectedTransactions.concat(selectedTxn));
+    const exists = selectedTransactions.find(
+      (transaction) => transaction.TransactionID === selectedTxn.TransactionID
+    );
+    if (exists) {
+      let newList = selectedTransactions.filter(
+        (transaction) => transaction.TransactionID !== selectedTxn.TransactionID
+      );
+      setSelectedTransactions(newList);
     } else {
-        let newList = selectedTransactions.filter(transaction => transaction.id !== selectedTxn.id);
-        setSelectedTransactions(newList);
+      setSelectedTransactions(selectedTransactions.concat(selectedTxn));
     }
   }
 
-  useEffect(() => {
+  const handleDelete = () => {
     console.log(selectedTransactions);
-  }, [selectedTransactions])
-  
+  };
+
+  const handleAdd = () => {};
 
   return (
     <div>
@@ -58,16 +60,13 @@ function Transaction() {
               <div>
                 <ButtonGroup style={{ flex: "1" }}>
                   <Button>Add</Button>
-                  <Button>Delete</Button>
+                  <Button onClick={handleDelete}>Delete</Button>
                 </ButtonGroup>
               </div>
               <Table>
                 <TableHead>
                   <TableRow>
-                    <TableCell>
-                      {/* TODO: fix checkbox */}
-                      <Checkbox />
-                    </TableCell>
+                    <TableCell></TableCell>
                     <TableCell>Transaction ID</TableCell>
                     <TableCell>Account ID</TableCell>
                     <TableCell>Receiving Account ID</TableCell>
@@ -82,7 +81,10 @@ function Transaction() {
                       <TableRow key={index}>
                         <TableCell>
                           <Checkbox
-                            onChange={() => checkTransactions(transaction)}
+                            id={"checkbox-" + index}
+                            onChange={(ev) => {
+                              checkTransactions(transaction);
+                            }}
                           />
                         </TableCell>
                         <TableCell>{transaction.TransactionID}</TableCell>
