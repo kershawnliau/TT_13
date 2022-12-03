@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Stack, TextField, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const ProfilePage = () => {
+  const { isLoggedIn, userId, login, logout } = useContext(AuthContext);
+
   const [email, setEmail] = React.useState("");
   const [address, setAddress] = React.useState("");
 
@@ -58,7 +62,13 @@ const ProfilePage = () => {
           <Button variant="contained">Save Changes</Button>
         </Stack>
       </form>
-      <Button variant="outlined" fullWidth sx={{ marginTop: "2rem" }}>
+      <Button
+        variant="outlined"
+        fullWidth
+        sx={{ marginTop: "2rem" }}
+        component={Link}
+        to="/home"
+      >
         Back
       </Button>
     </div>
