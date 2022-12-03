@@ -25,17 +25,13 @@ def test():
 @transactions.route('/create', methods=["GET"])
 def createTransaction():
     try:
-        accountID = 621156213
-        receiveAccountID = 339657462
-        amount = 8000.50
-        comment = "Hello test"
-        now = datetime.now()
-        currentDT = now.strftime('%y-%m-%d')
 
         conn = mysql.connect()
         cursor = conn.cursor()
-        q = "INSERT INTO ScheduledTransactions (transactionid, accountid, receivingaccountid, date, transactionamount, comment) VALUES (%s, %s, %s, %s, %f, %s)"
-        values = (10, accountID, receiveAccountID, currentDT, amount, comment)
+        results = cursor.execute("SELECT max(transactionid) FROM ScheduledTransactions")
+
+        q = "INSERT INTO ScheduledTransactions (transactionid, accountid, receivingaccountid, date, transactionamount, comment) VALUES (%s, %s, %s, %s, %s, %s)"
+        values = (id, accountID, receiveAccountID, currentDT, amount, comment)
         cursor.execute(q, values)
         conn.commit()
         return 'Success', 201
