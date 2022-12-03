@@ -8,7 +8,7 @@ import { AuthContext } from './context/AuthContext'
 import Transaction from './components/home/Transaction/Transaction'
 
 function App() {
-	const [isLoggedIn, setIsLoggedIn] = useState(false)
+	const [isLoggedIn, setIsLoggedIn] = useState(true)
 	const [userId, setUserId] = useState(null)
 	const [route, setRoute] = useState(null)
 	const login = (userId) => {

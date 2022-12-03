@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { Button, Container, Stack } from '@mui/material'
 import HomeMenu from './components/HomeMenu'
 import UserDetailsCard from './components/UserDetailsCard'
 import axios from 'axios'
 import Transaction from './Transaction/Transaction'
 import PhishingModal from './components/PhishingModal'
+import { AuthContext } from '../../context/AuthContext'
 
 function Home() {
-	const [user, setAuthenticated] = useState(false)
+	const userId = 1
+	// const { userId } = useContext(AuthContext)
 	const [username, setUsername] = useState('')
 	const [totalBalance, setTotalBalance] = useState(0)
 
@@ -21,12 +23,13 @@ function Home() {
 
 	function getUserData() {
 		axios
-			.get(`https://api.publicapis.org/entries`)
+			.get(`http://localhost:5000/edit`)
 			.then((res) => {
-				// let response = res.data
-				setUsername('Emily Tan')
+				console.log('res', res)
+				let response = res.data
+				let user = response.filter((item) => item.UserID == userId)[0]
+				setUsername(user.Firstname + ' ' + user.Lastname)
 				setTotalBalance(100000)
-				// setUsername(response.username)
 				// setTotalBalance(getTotalBalance(response))
 			})
 			.catch((err) => {
@@ -38,6 +41,10 @@ function Home() {
 	useEffect(() => {
 		getUserData()
 	}, [])
+
+	useEffect(() => {
+		console.log('userId:', userId)
+	}, [userId])
 
 	return (
 		<Container>
