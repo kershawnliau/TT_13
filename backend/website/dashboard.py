@@ -20,12 +20,10 @@ def login():
 def getuser():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM User")
+    cursor.execute("SELECT UserID, Username, Firstname, Lastname, Email, Address FROM User")
     results = cursor.fetchall() 
-    print("fetch result-->",type(results))  #is s list type, need to be a dict
 
     fields_list = cursor.description   # sql key name
-    print("fields result -->",type(fields_list))
 
     column_list = []
     for i in fields_list:
@@ -39,18 +37,11 @@ def getuser():
         jsonData_list.append(data_dict)
     print("print final json data",jsonData_list)
 
-    #convert to json
-    # json_data = json.dumps(jsonData_list)
-    # print("print final json data",json_data)
+    json_str = json.dumps(jsonData_list, cls=BytesEncoder)
+    print(type(json_str))
+    results = json_str.replace("\\","")
+    print(results)
+    return jsonify({"data": json_str, "code":200})
 
-    # results = list(results)
-    # print(results)
-    results = [str(i) for i in jsonData_list]
-    #convert string to json
-    # results = json.dumps(jsonData_list)
-    # results = json.dumps(list(jsonData_list))
-    #decode json
-    json_str = json.dumps({'message': jsonData_list}, cls=BytesEncoder)
-    return jsonify({"code": 200, "message": "success", "data": json_str})
 
 
