@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Stack, TextField, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 const ProfilePage = () => {
+  const { isLoggedIn, userId, login, logout } = useContext(AuthContext);
+
   const [email, setEmail] = React.useState("");
   const [address, setAddress] = React.useState("");
 
@@ -20,6 +24,20 @@ const ProfilePage = () => {
   };
   const toggleEditAddress = () => {
     isEditAddress(true);
+  };
+
+  const submitChange = async (event) => {
+    event.preventDefault();
+    const res = await fetch(`http://localhost:5000/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        address: address,
+      }),
+    });
   };
 
   return (
@@ -55,10 +73,18 @@ const ProfilePage = () => {
               </Button>
             </div>
           </div>
-          <Button variant="contained">Save Changes</Button>
+          <Button variant="contained" onClick={submitChange}>
+            Save Changes
+          </Button>
         </Stack>
       </form>
-      <Button variant="outlined" fullWidth sx={{ marginTop: "2rem" }}>
+      <Button
+        variant="outlined"
+        fullWidth
+        sx={{ marginTop: "2rem" }}
+        component={Link}
+        to="/home"
+      >
         Back
       </Button>
     </div>
