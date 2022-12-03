@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container } from '@mui/material'
+import { Button, Container, Stack } from '@mui/material'
 import HomeMenu from './components/HomeMenu'
 import UserDetailsCard from './components/UserDetailsCard'
 import axios from 'axios'
@@ -7,6 +7,7 @@ import Transaction from './Transaction/Transaction'
 import PhishingModal from './components/PhishingModal'
 
 function Home() {
+	const [user, setAuthenticated] = useState(false)
 	const [username, setUsername] = useState('')
 	const [totalBalance, setTotalBalance] = useState(0)
 
@@ -54,6 +55,17 @@ function Home() {
 
 			<UserDetailsCard username={username} balance={totalBalance} />
 			<Transaction />
+			<Button
+				variant="contained"
+				style={{
+					position: 'fixed',
+					bottom: '50px',
+					right: '50px',
+					backgroundColor: 'red'
+				}}
+			>
+				Add
+			</Button>
 		</Container>
 	)
 }
