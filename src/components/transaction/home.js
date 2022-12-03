@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState} from 'react'; 
 var bankBalance = 10
 
 function Transaction() {
@@ -32,80 +32,98 @@ function Transaction() {
     setComments('');
   };
 
-  return (
-    <>
-      <div>Supposed to have a NAV bar here</div>
-      <h1>New Transaction</h1>
-      <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column"}}>  
-        <label>
-          Recipient ID:
-          <input
-            id="Recipient" 
-            type="text" 
-            name="Recipient" 
-            onChange={event => setRecipient(event.target.value)}
-            value={recipient}/>
-        </label>
+    return (
+        <>
+        <div>Supposed to have a NAV bar here</div>
+        <h1 className="text-2xl flex justify-center content-center">New Transaction</h1>
+        <form onSubmit={handleSubmit} className="flex justify-center flex-row content-center">  
+            <div className="w-1/4"/>
+            <div className="flex justify-center flex-col content-center w-1/2">
+            <label>
+            Recipient ID:
+            </label>
 
-        <label>
-          Recipient Account Type:
-          <input
-            id="AccountType" 
-            type="text" 
-            name="AccountType" 
-            onChange={event => setAccountType(event.target.value)}
-            value={accountType}/>
-        </label>
+            <label>
+            Recipient Account Type:
+            </label>
+            
 
-        <label>
-          Amount:
-          <input
-            id="Amount" 
-            type="text" 
-            name="Amount" 
-            onChange={event => {
-              if(!isNaN(event.target.value)){
-                if(bankBalance >= parseFloat(event.target.value)){
-                  console.log("bankBalance", bankBalance)
-                  setAmount(parseFloat(event.target.value))
+            <label>
+            Amount:
+            </label>
+
+            <label>
+            Date to Transfer:
+            </label>
+
+            <label>
+            Comments:
+            </label>
+            
+            </div>
+
+            <div className='w-1/4'>
+            <input
+                id="Recipient" 
+                type="text" 
+                name="Recipient" 
+                onChange={event => setRecipient(event.target.value)}
+                value={recipient}
+                className='border-slate-1000 border-2'/>
+
+            <input
+                id="AccountType" 
+                type="text" 
+                name="AccountType" 
+                onChange={event => setAccountType(event.target.value)}
+                value={accountType}
+                className='border-slate-1000 border-2'/>
+
+            <input
+                id="Amount" 
+                type="text" 
+                name="Amount" 
+                onChange={event => {
+                if(!isNaN(event.target.value)){
+                    if(bankBalance >= parseFloat(event.target.value)){
+                    console.log("bankBalance", bankBalance)
+                    setAmount(parseFloat(event.target.value))
+                    }
+                    else{
+                    setAmount("Balance:" + bankBalance)
+                    setTimeout(() => { setAmount(""); }, 700);
+                    }
                 }
                 else{
-                  setAmount("Balance:" + bankBalance)
-                  setTimeout(() => { setAmount(""); }, 700);
+                    setAmount("Not a valid value")
+                    setTimeout(() => { setAmount(""); }, 700);
                 }
-              }
-              else{
-                setAmount("Not a valid value")
-                setTimeout(() => { setAmount(""); }, 700);
-              }
-              }
-            }
-            value={amount}/>
-        </label>
+                }
+                }
+                value={amount}
+                className='border-slate-1000 border-2'/>
+            
+            <input
+                id="Date" 
+                type="date" 
+                name="Date" 
+                onChange={event => setDate(event.target.value)}
+                value={date}
+                className='border-slate-1000 border-2'/>
 
-        <label>
-          Date to Transfer:
-          <input
-            id="Date" 
-            type="date" 
-            name="Date" 
-            onChange={event => setDate(event.target.value)}
-            value={date}/>
-        </label>
-
-        <label>
-        Comments:
-          <input
-            id="Comments" 
-            type="text" 
-            name="Comments" 
-            onChange={event => setComments(event.target.value)}
-            value={comments}/>
-        </label>
-
-        <button type="submit">Submit form</button>
-      </form> 
-    </>
+            <input
+                id="Comments" 
+                type="text" 
+                name="Comments" 
+                onChange={event => setComments(event.target.value)}
+                value={comments}
+                className='border-slate-1000 border-2'/>
+            
+            <button type="submit">Submit form</button>
+            </div>
+            <div className="w-1/4"/>
+        </form> 
+        </>
     )
 }
 
