@@ -92,7 +92,9 @@ export default function HomeMenu() {
       >
         <MenuItem>
           <CustomAvatar />
-          <Button>Profile</Button>
+          <Button component={Link} to="/profile">
+            Profile
+          </Button>
         </MenuItem>
         <Divider />
         <MenuItem>
