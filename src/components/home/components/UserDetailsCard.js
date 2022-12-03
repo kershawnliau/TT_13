@@ -6,7 +6,13 @@ import Typography from '@mui/material/Typography'
 
 export default function UserDetailsCard({ username, balance }) {
 	return (
-		<Card sx={{ minWidth: 275 }}>
+		<Card
+			style={{
+				borderColor: 'transparent',
+				boxShadow: 'none'
+			}}
+			sx={{ minWidth: 275 }}
+		>
 			<CardContent style={{ margin: 12 }}>
 				<Typography
 					sx={{ fontSize: 14 }}

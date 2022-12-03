@@ -6,7 +6,10 @@ import axios from 'axios'
 import Transaction from './Transaction/Transaction'
 
 function Home() {
-	const [userData, setUserData] = useState({})
+	const [userData, setUserData] = useState({
+		username: 'Emily Tan',
+		balance: '100,000'
+	})
 
 	function getUserData() {
 		let response
@@ -14,7 +17,7 @@ function Home() {
 			.get(`https://api.publicapis.org/entries`)
 			.then((res) => {
 				response = res.data
-				setUserData(response)
+				// setUserData(response)
 			})
 			.catch((err) => {
 				console.error(err)
@@ -43,8 +46,11 @@ function Home() {
 				<HomeMenu />
 			</Container>
 
-			<UserDetailsCard username="User 123" balance="100,000" />
-            <Transaction />
+			<UserDetailsCard
+				username={userData.username}
+				balance={userData.balance}
+			/>
+			<Transaction />
 		</Container>
 	)
 }
