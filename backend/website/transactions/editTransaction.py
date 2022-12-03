@@ -6,20 +6,36 @@ from .. import mysql
 transactions = Blueprint('transactions', __name__)
 
 
-@transactions.route('/create', methods=["POST"])
-def createTransaction():
+@transactions.route('/test', methods=["GET"])
+def test():
     try:
-        accountID = "621156213"
-        receiveAccountID = 828120424
-        transactionAmount = 8000
-        comment = "Hello test"
         now = datetime.now()
-        currentDT = now.strftime('%Y-%m-%d %H:%M:%S')
+        currentDT = now.strftime('%y-%m-%d')
 
         conn = mysql.connect()
         cursor = conn.cursor()
-        q = "INSERT INTO ScheduledTransactions (AccountID, ReceivingAccountID, Date, TransactionAmount, Comment) VALUES (%s, %d, %s, %d, %s)"
-        values = (accountID, receiveAccountID, currentDT, transactionAmount, comment)
+        q = "INSERT INTO Test (username, creation_date) VALUES (%s, %s)"
+        values = (username, currentDT)
+        cursor.execute(q, values)
+        conn.commit()
+        return 'Success', 201
+    except:
+        return print("EXCEPTION")
+
+@transactions.route('/create', methods=["GET"])
+def createTransaction():
+    try:
+        accountID = 621156213
+        receiveAccountID = 339657462
+        amount = 8000.50
+        comment = "Hello test"
+        now = datetime.now()
+        currentDT = now.strftime('%y-%m-%d')
+
+        conn = mysql.connect()
+        cursor = conn.cursor()
+        q = "INSERT INTO ScheduledTransactions (transactionid, accountid, receivingaccountid, date, transactionamount, comment) VALUES (%s, %s, %s, %s, %f, %s)"
+        values = (10, accountID, receiveAccountID, currentDT, amount, comment)
         cursor.execute(q, values)
         conn.commit()
         return 'Success', 201
