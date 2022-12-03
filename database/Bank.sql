@@ -1,4 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `Bank` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+CREATE DATABASE  IF NOT EXISTS `Bank` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE=utf8_general_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `Bank`;
 -- MySQL dump 10.13  Distrib 8.0.21, for macos10.15 (x86_64)
 --
@@ -30,7 +30,7 @@ CREATE TABLE `BankAccount` (
   `AccountType` varchar(255) DEFAULT NULL,
   `AccountBalance` decimal(10,2) DEFAULT NULL,
   PRIMARY KEY (`AccountID`,`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -49,7 +49,7 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ScheduledTransactions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+/*!50503 SET character_set_client = utf8 */;
 CREATE TABLE `ScheduledTransactions` (
   `TransactionID` int NOT NULL,
   `AccountID` int NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE `ScheduledTransactions` (
   `TransactionAmount` decimal(10,2) DEFAULT NULL,
   `Comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`TransactionID`,`AccountID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -88,7 +88,7 @@ CREATE TABLE `User` (
   `Address` varchar(255) DEFAULT NULL,
   `OptIntoPhyStatements` bit(1) DEFAULT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
