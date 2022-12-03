@@ -1,6 +1,7 @@
 from flask import Blueprint, request, jsonify
 import json
 from . import mysql
+import decimal
 
 dashboard = Blueprint('dashboard', __name__)
 
@@ -50,7 +51,7 @@ def getbankaccount():
     userid = request.get_json()["userid"]
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM bankaccount where UserID = %s", (userid))
+    cursor.execute("SELECT * FROM bankaccount where UserID = %s", (userid) )
     print("userid",userid)
     results = cursor.fetchall() 
     results = list(results)
@@ -63,9 +64,16 @@ def getbankaccount():
 
     jsonData_list = []
     for row in results:
+        print(type(row))
         data_dict = {}
         for i in range(len(column_list)):
-            data_dict[column_list[i]] = row[i]
+            print(type(column_list[i]))
+            #convert to float if decimal
+            if isinstance(row[i], decimal.Decimal):
+                data_dict[column_list[i]] = float(row[i])
+            else:
+                data_dict[column_list[i]] = row[i]
+
         jsonData_list.append(data_dict)
     print("print final json data",jsonData_list)
 
