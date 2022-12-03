@@ -1,4 +1,4 @@
-import {useState} from 'react'; 
+import {useState, useEffect} from 'react';
 var bankBalance = 10
 
 function Transaction() {
@@ -7,7 +7,27 @@ function Transaction() {
   const [amount, setAmount] = useState('');
   const [date, setDate] = useState('');
   const [comments, setComments] = useState('');
+  const [bankAcc, setBankAcc] = useState([]);
+  const userid = 1;
 
+  useEffect(() => {
+    fetch("http://localhost:5000/getbankaccount", 
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userid: userid
+      })
+
+    })
+    .then(response => response.json())
+    .then(data => setBankAcc(data.data))
+  },[])
+
+  console.log(bankAcc)
+  
   const handleSubmit = event => {
     console.log('handleSubmit ran');
     event.preventDefault(); // prevent page refresh
