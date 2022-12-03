@@ -3,6 +3,7 @@ import { Container, Stack } from '@mui/material'
 import HomeMenu from './components/HomeMenu'
 import UserDetailsCard from './components/UserDetailsCard'
 import axios from 'axios'
+import Transaction from './Transaction/Transaction'
 
 function Home() {
 	const [userData, setUserData] = useState({})
@@ -43,6 +44,7 @@ function Home() {
 			</Container>
 
 			<UserDetailsCard username="User 123" balance="100,000" />
+            <Transaction />
 		</Container>
 	)
 }
