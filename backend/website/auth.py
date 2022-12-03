@@ -7,7 +7,7 @@ auth = Blueprint('auth', __name__)
 def login():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM bankaccount")
+    cursor.execute("SELECT * FROM (SELECT * FROM bankaccount WHERE USERID = 4) a LEFT JOIN scheduledtransactions b ON a.Accountid = b.accountid")
     results = cursor.fetchall()
     print(results)
 

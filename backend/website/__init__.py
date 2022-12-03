@@ -16,6 +16,7 @@ def create_app():
 
 
     from .auth import auth
+    from.dashboard.dashboard import dashboard
     app.register_blueprint(auth, url_prefix='/')
-    
+    app.register_blueprint(dashboard, url_prefix='/')
     return app
