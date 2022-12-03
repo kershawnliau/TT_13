@@ -59,7 +59,6 @@ function Transaction() {
             <AccordionDetails>
               <div>
                 <ButtonGroup style={{ flex: "1" }}>
-                  <Button>Add</Button>
                   <Button onClick={handleDelete}>Delete</Button>
                 </ButtonGroup>
               </div>
@@ -102,7 +101,6 @@ function Transaction() {
           </Accordion>
         );
       })}
-      ;
     </div>
   );
 }

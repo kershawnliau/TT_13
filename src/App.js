@@ -6,13 +6,14 @@ import ProfilePage from "./components/profile/ProfilePage";
 
 function App() {
   return (
-    // <BrowserRouter>
-    //     <Routes>
-    //       <Route exact path="/" element={<Login />}/>
-    //       <Route />
-    //     </Routes>
-    // </BrowserRouter>
-    <ProfilePage />
+    <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Home />}/>
+          <Route />
+        </Routes>
+    </BrowserRouter>
+    // <ProfilePage />
+    // <Home />
   );
 }
 

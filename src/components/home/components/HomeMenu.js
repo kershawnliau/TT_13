@@ -10,7 +10,6 @@ import Tooltip from "@mui/material/Tooltip";
 import Logout from "@mui/icons-material/Logout";
 import CustomAvatar from "./Avatar";
 import logo from "../../../assets/dbs-logo.png";
-import { Link } from "react-router-dom";
 
 export default function HomeMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);

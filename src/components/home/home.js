@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Stack } from '@mui/material'
+import { Button, Container, Stack } from '@mui/material'
 import HomeMenu from './components/HomeMenu'
 import UserDetailsCard from './components/UserDetailsCard'
 import axios from 'axios'
@@ -51,6 +51,7 @@ function Home() {
 				balance={userData.balance}
 			/>
 			<Transaction />
+            <Button variant="contained" style={{position: "fixed", bottom: "50px", right: "50px", backgroundColor: "red"}}>Add</Button>
 		</Container>
 	)
 }
