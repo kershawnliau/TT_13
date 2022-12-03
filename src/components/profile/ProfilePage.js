@@ -26,6 +26,20 @@ const ProfilePage = () => {
     isEditAddress(true);
   };
 
+  const submitChange = async (event) => {
+    event.preventDefault();
+    const res = await fetch(`http://localhost:5000/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: email,
+        address: address,
+      }),
+    });
+  };
+
   return (
     <div style={{ margin: "0 5rem" }}>
       <h1>Profile</h1>
@@ -59,7 +73,9 @@ const ProfilePage = () => {
               </Button>
             </div>
           </div>
-          <Button variant="contained">Save Changes</Button>
+          <Button variant="contained" onClick={submitChange}>
+            Save Changes
+          </Button>
         </Stack>
       </form>
       <Button
