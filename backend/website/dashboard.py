@@ -2,8 +2,11 @@ from flask import Blueprint, request, jsonify
 import json
 from . import mysql
 import decimal
+from flask_cors import CORS, cross_origin
 
 dashboard = Blueprint('dashboard', __name__)
+
+cors = CORS(dashboard)
 
 class BytesEncoder(json.JSONEncoder):
     def default(self, obj):
