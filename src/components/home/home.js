@@ -29,8 +29,6 @@ function Home() {
 				let response = res.data
 				let user = response.filter((item) => item.UserID == userId)[0]
 				setUsername(user.Firstname + ' ' + user.Lastname)
-				setTotalBalance(100000)
-				// setTotalBalance(getTotalBalance(response))
 			})
 			.catch((err) => {
 				console.error(err)
@@ -40,6 +38,26 @@ function Home() {
 
 	useEffect(() => {
 		getUserData()
+
+		fetch('http://localhost:5000/getbankaccount', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({
+				userid: userId
+			})
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				let sum = 0
+				data.forEach((item) => {
+					// console.log('item', item['AccountBalance'])
+					sum += item['AccountBalance']
+				})
+
+				setTotalBalance(sum)
+			})
 	}, [])
 
 	useEffect(() => {
