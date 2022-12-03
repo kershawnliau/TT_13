@@ -26,11 +26,9 @@ export default function UserDetailsCard({ username, balance }) {
 						color: 'transparent'
 					}}
 				/>
-				<Typography variant="body2">
-					Total Balance
-					<Typography variant="h5" component="div">
-						${balance}
-					</Typography>
+				<Typography variant="body2">Total Balance</Typography>
+				<Typography variant="h5" component="div">
+					${balance}
 				</Typography>
 			</CardContent>
 		</Card>

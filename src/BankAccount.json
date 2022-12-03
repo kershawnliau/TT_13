@@ -1,0 +1,50 @@
+[
+    {
+        "AccountID": 621156213,
+        "UserID": 1,
+        "AccountType": "Saving",
+        "AccountBalance": 70200.71
+    },
+    {
+        "AccountID": 958945214,
+        "UserID": 1,
+        "AccountType": "Current",
+        "AccountBalance": 99720.46
+    },
+    {
+        "AccountID": 828120424,
+        "UserID": 2,
+        "AccountType": "Multiplier",
+        "AccountBalance": 50640.12
+    },
+    {
+        "AccountID": 322798030,
+        "UserID": 3,
+        "AccountType": "Multiplier",
+        "AccountBalance": 39740.17
+    },
+    {
+        "AccountID": 353677039,
+        "UserID": 3,
+        "AccountType": "Saving",
+        "AccountBalance": 76660.21
+    },
+    {
+        "AccountID": 259555772,
+        "UserID": 4,
+        "AccountType": "Saving",
+        "AccountBalance": 14020.58
+    },
+    {
+        "AccountID": 339657462,
+        "UserID": 1,
+        "AccountType": "Current",
+        "AccountBalance": 47380.33
+    },
+    {
+        "AccountID": 785703027,
+        "UserID": 5,
+        "AccountType": "Current",
+        "AccountBalance": 42460.32
+    }
+]
