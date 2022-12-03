@@ -3,6 +3,7 @@ from . import mysql
 
 auth = Blueprint('auth', __name__)
 
+
 @auth.route('/login', methods=["GET", "POST"])
 def login():
     conn = mysql.connect()

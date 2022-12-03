@@ -1,6 +1,7 @@
 from flask import Blueprint, request
 from flask import jsonify
 from website import mysql
+import json
 
 editinfo = Blueprint('editinfo', __name__)
 
@@ -8,14 +9,19 @@ editinfo = Blueprint('editinfo', __name__)
 def edit():
     conn = mysql.connect()
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM bankaccount")
+    cursor.execute("select * from user")
     row_headers=[x[0] for x in cursor.description] #this will extract row headers
     results = cursor.fetchall()
     print(results)
     print("...")
     jsondata=[]
+    results = list(results)
     for result in results:
-        jsondata.append(dict(zip(row_headers, result)))
+        li = list(result)
+        for rs in li:            
+            if isinstance(rs, bytes):
+                li[li.index(rs)] = rs.decode('utf-8')
+        jsondata.append(dict(zip(row_headers, li)))
     print(jsondata)
     return jsonify(jsondata)
 
