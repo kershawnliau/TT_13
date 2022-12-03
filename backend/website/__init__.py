@@ -9,7 +9,7 @@ mysql = MySQL()
 def create_app():
     app = Flask(__name__)
     app.config['MYSQL_DATABASE_USER'] = 'root'
-    app.config['MYSQL_DATABASE_PASSWORD'] = 'root'
+    app.config['MYSQL_DATABASE_PASSWORD'] = 'password'
     app.config['MYSQL_DATABASE_DB'] = 'bank'
     app.config['MYSQL_DATABASE_HOST'] = 'localhost'
     mysql.init_app(app)
@@ -17,5 +17,8 @@ def create_app():
 
     from .auth import auth
     app.register_blueprint(auth, url_prefix='/')
+
+    from .createTransaction import transactions
+    app.register_blueprint(transactions, url_prefix="/")
     
     return app
